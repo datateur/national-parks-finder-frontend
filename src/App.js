@@ -1,16 +1,11 @@
 import "./App.css";
-
-var map = window.L.map('map').setView([51.505, -0.09], 13);
-
-window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
+import Map from "./components/Map.js"
 
 function App() {
   return (
     <div className="App">
       <main>
+        <Map />
       </main>
     </div>
   );
