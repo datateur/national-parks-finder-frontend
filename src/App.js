@@ -1,12 +1,12 @@
 import "./App.css";
-import Map from "./components/Map.js"
+import ActivitiesList from "./components/ActivitiesList";
 
-function App() {
+const App = () => {
+
   return (
     <div className="App">
-      <main>
-        <Map />
-      </main>
+      <h2> This is app</h2>
+      <ActivitiesList/>
     </div>
   );
 }

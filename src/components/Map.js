@@ -1,6 +1,10 @@
 import "./Map.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const Map = () => {
+  const [mapData, setMapData] = useState([]);
+
   var map = window.L.map('map').setView([51.505, -0.09], 13);
 
   window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -10,6 +14,20 @@ const Map = () => {
 
   var marker = window.L.marker([51.5, -0.09]).addTo(map);
 
+  // map component makes an http request every time the end user clicks on a filter
+  // the map then rerenders with only the filtered markers
+  // the initial render shows all parks
+  // the map then listens to a filter button click event for each rerender
+
+  // useEffect(() => {
+  //   axios.get(`${process.env.BACKEND_URL}/parks/locations`)
+  //   .then((response) => {
+  //     console.log(response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.log("Error:", error);
+  //   });
+  // }, []);
 };
 
 export default Map;
