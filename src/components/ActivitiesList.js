@@ -2,20 +2,20 @@ import "./ActivitiesList.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ActivitiesList = () => {
+//container component for activities
+// holds the activity data (clicked or unclicked)
+// modifies the data
+// sends the data to activitieslist
+const ActivitiesList = ({activities}) => {
 
-  // useEffect(() => {
-  //   axios.get(`${process.env.BACKEND_URL}/activities`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log("Error:", error);
-  //     });
-  // }, []);
 
   return (
+    <>
     <h3>Activities</h3>
+    <ul>
+      {/* {activities.map()} */}
+    </ul>
+    </>
   )
 };
 
