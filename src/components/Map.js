@@ -1,6 +1,7 @@
 import "./Map.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { MapContainer, TileLayer } from 'react-leaflet';
 
 // var map = null;
 
@@ -30,6 +31,13 @@ const Map = () => {
   //     console.log("Error:", error);
   //   });
   // }, []);
+
+  return (
+    <MapContainer
+    center = {[51.505, -0.09]}
+    zoom = {13}
+    />
+  );
 };
 
 export default Map;
