@@ -2,22 +2,25 @@ import "./App.css";
 import axios from "axios";
 import ActivitiesList from "./components/ActivitiesList";
 import Map from "./components/Map";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const App = () => {
   const [mapMarkers, setMapMarkers] = useState([]);
+  const [activities, setActivities] = useState([]);
 
-// // call to get activities
-//   useEffect(() => {
-//     axios.get('https://national-parks-finder-backend.herokuapp.com/activities')
-//       .then((response) => {
-//         console.log(response.data.activities)
-//         const activities = response.data.activities
-//       })
-//       .catch((error) => {
-//         console.log("Error:", error);
-//       });
-//   }, []); // dependency, useeffect is triggered every time this changes
+// call to get activities
+useEffect(() => {
+    axios.get('https://national-parks-finder-backend.herokuapp.com/activities')
+      .then((response) => {
+        console.log(response.data.activities);
+        setActivities(response.data.activities);
+        return response.data;
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+    }, []);
+ // dependency, useeffect is triggered every time this changes
 
   //call to get location
   useEffect(() => {
@@ -25,7 +28,7 @@ const App = () => {
       .then((response) => {
           setMapMarkers(response.data);
           console.log(response.data);
-          return response.data
+          return response.data;
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -54,8 +57,7 @@ const App = () => {
       <Map mapMarkers={mapMarkers}/>
       <section className="sidebar">
         <h2> This is app</h2>
-        <ActivitiesList
-        // activitiesData={activities}
+        <ActivitiesList activities={activities}
         // onSelectActivity={selectActivity}
         />
       </section>

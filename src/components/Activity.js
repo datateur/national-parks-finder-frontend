@@ -6,11 +6,11 @@ import "./Activity.css";
 const Activity = ({activity}) => {
 
   return (
-    <li
+    <button
       /* onClick={() => onSelectActivity()} */
       /* className={selectedActivity} */>
       {activity}
-      </li>
+      </button>
   );
 };
 
