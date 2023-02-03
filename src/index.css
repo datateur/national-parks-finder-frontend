@@ -1,5 +1,4 @@
 body {
-  height: 100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -7,13 +6,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+/* 
 #map-display {
   margin-left: 30%;
   grid-area: 1 / 3 / 2 / 8;
   height: 100%;
   width: 70%;
-}
+} */
 
 
 

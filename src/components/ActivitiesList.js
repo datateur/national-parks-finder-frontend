@@ -3,9 +3,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 //container component for activities
-// holds the activity data (clicked or unclicked)
+// holds the activity (wether its clicked or unclicked)
 // modifies the data
-// sends the data to activitieslist
+// sends the data to app
 const ActivitiesList = ({activities}) => {
 
 
