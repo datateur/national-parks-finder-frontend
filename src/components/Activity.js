@@ -3,11 +3,10 @@ import "./Activity.css";
 
 // presentational component for activities
 // should only make a list of activities and display
-const Activity = ({activity}) => {
+const Activity = ({activity, selectActivity}) => {
 
   return (
-    <button
-      /* onClick={() => onSelectActivity()} */
+    <button onClick={() => selectActivity(activity)}
       /* className={selectedActivity} */>
       {activity}
       </button>

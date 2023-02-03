@@ -8,19 +8,22 @@ import Activity from './Activity.js'
 // modifies the data
 // sends the data to app
 const ActivitiesList = ({activities}) => {
+  const [selectedActivities, setSelectedActivities] = useState([]);
 
-  for (const activity in activities) {
-    <Activity activity={activity} />
-  }
+  const selectActivity = (activity) => {
+    console.log("This is selectActivity func")
+    const newActivitiesList = [...selectedActivities];
+    newActivitiesList.push(activity);
+    setSelectedActivities(newActivitiesList)
+    console.log(activity)
+  };
 
-  console.log("This is activitiesList")
-  console.log(activities)
 
   return (
     <>
     <h3>Activities</h3>
     <ul className='activities-list'>
-      {activities.map((activity) => (<Activity activity={activity} />))}
+      {activities.map((activity) => (<Activity activity={activity} selectActivity={selectActivity} />))}
     </ul>
     </>
   )
