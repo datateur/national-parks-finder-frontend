@@ -25,7 +25,7 @@ const Map = ({mapMarkers}) => {
         attribution={'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}
       />
       {mapMarkers.map((park) => (
-          <Marker position={[park.location.lat, park.location.long]}>
+          <Marker position={[park.latitude, park.longitude]}>
             <Popup>
               {park.park_name}
             </Popup>

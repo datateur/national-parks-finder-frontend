@@ -14,8 +14,10 @@ const App = () => {
     const newActivitiesList = [...selectedActivities];
     newActivitiesList.push(activity);
     setSelectedActivities(newActivitiesList)
-    console.log(selectedActivities)
+    console.log("selected")
   };
+
+  console.log(selectedActivities)
 
   const deselectActivity = (activity) => {
     console.log('This is deselect func')
@@ -23,7 +25,6 @@ const App = () => {
       return filterActivity !== activity;
     });
     setSelectedActivities(newActivitiesList)
-    console.log(selectedActivities)
     console.log("deselected")
   };
 
@@ -42,17 +43,31 @@ useEffect(() => {
  // dependency, useeffect is triggered every time this changes
 
   //call to get locations
-  useEffect(() => {
-    axios.get('https://national-parks-finder-backend.herokuapp.com/parks/locations')
-      .then((response) => {
-          setMapMarkers(response.data);
-          console.log(response.data);
-          return response.data;
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-      });
-  }, []); // make this dependant on selectedActivities
+  // useEffect(() => {
+  //   axios.get('https://national-parks-finder-backend.herokuapp.com/parks/locations')
+  //     .then((response) => {
+  //         setMapMarkers(response.data);
+  //         console.log(response.data);
+  //         return response.data;
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error:", error);
+  //     });
+  // }, []);
+
+    //call to get filtered locations
+    useEffect(() => {
+      axios.post('https://national-parks-finder-backend.herokuapp.com/parks/filter',
+        {'activities': selectedActivities})
+        .then((response) => {
+            setMapMarkers(response.data);
+            console.log(response.data);
+            return response.data;
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    }, [selectedActivities]); // make this dependant on selectedActivities
 
   
 // axios call to get topics
