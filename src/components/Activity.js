@@ -1,15 +1,22 @@
 import "./Activity.css";
-import "./Activity.css";
+import { useState, useEffect } from "react";
 
 // presentational component for activities
 // should only make a list of activities and display
-const Activity = ({activity, selectActivity}) => {
+const Activity = ({activity, selectActivity, deselectActivity}) => {
+// create a state that holds wether a button is selected or unselected?
+  const [toggle, setToggle] = useState(false);
+
+  const handleClick = () => {
+    toggle? deselectActivity(activity) : selectActivity(activity)
+    setToggle(!toggle);
+  };
 
   return (
-    <button onClick={() => selectActivity(activity)}
-      /* className={selectedActivity} */>
+    <button onClick={handleClick}
+      className={toggle? 'activity-button-selected' : 'activity-button-unselected'} >
       {activity}
-      </button>
+    </button>
   );
 };
 

@@ -7,23 +7,21 @@ import Activity from './Activity.js'
 // holds the activity (wether its clicked or unclicked)
 // modifies the data
 // sends the data to app
-const ActivitiesList = ({activities}) => {
-  const [selectedActivities, setSelectedActivities] = useState([]);
+const ActivitiesList = ({activities, selectActivity, deselectActivity}) => {
 
-  const selectActivity = (activity) => {
-    console.log("This is selectActivity func")
-    const newActivitiesList = [...selectedActivities];
-    newActivitiesList.push(activity);
-    setSelectedActivities(newActivitiesList)
-    console.log(activity)
-  };
+
 
 
   return (
     <>
     <h3>Activities</h3>
     <ul className='activities-list'>
-      {activities.map((activity) => (<Activity activity={activity} selectActivity={selectActivity} />))}
+      {activities.map((activity) =>
+      (<Activity 
+      activity={activity}
+      selectActivity={selectActivity} 
+      deselectActivity={deselectActivity}
+      />))}
     </ul>
     </>
   )
