@@ -18,7 +18,18 @@ const Map = ({mapMarkers}) => {
           <Marker key={park.parkCode}
           position={[park.latitude, park.longitude]}>
             <Popup>
-              {park.fullName}
+
+              {<section className="park-bio">
+                <h2>{park.full_name}</h2>
+                <p>{park.description}</p>
+                <h2>Contacts</h2>
+                <p>Phone: {park.contacts.phoneNumbers}</p>
+                <li>Fees {park.entranceFees.cost}</li>
+
+              
+              
+              
+              </section>}
             </Popup>
           </Marker>
       ))}

@@ -22,7 +22,7 @@ const App = () => {
     setSelectedActivities(newActivitiesList)
   };
 
-// call to get activities
+// call to get all activities
 useEffect(() => {
     axios.get('https://national-parks-finder-backend.herokuapp.com/activities')
       .then((response) => {
@@ -47,7 +47,7 @@ useEffect(() => {
   //     });
   // }, []);
 
-    //call to get filtered locations
+  //call to get filtered locations
     useEffect(() => {
       axios.post('https://national-parks-finder-backend.herokuapp.com/parks/filter',
         {'activities': selectedActivities})
