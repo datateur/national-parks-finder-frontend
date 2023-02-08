@@ -10,6 +10,7 @@ const App = () => {
   const [activities, setActivities] = useState([]);
   const [topics, setTopics] = useState([]);
   const [selectedActivities, setSelectedActivities] = useState([]);
+  const [selectedTopics, setSelectedTopics] = useState([]);
 
   const selectActivity = (activity) => {
     const newActivitiesList = [...selectedActivities];
@@ -24,6 +25,19 @@ const App = () => {
     setSelectedActivities(newActivitiesList)
   };
 
+  const selectTopic = (topic) => {
+    const newTopicsList = [...selectedTopics];
+    newTopicsList.push(topic);
+    setSelectedTopics(newTopicsList)
+  };
+
+  const deselectTopic = (topic) => {
+    const newTopicsList = selectedTopics.filter((filterTopic) => {
+      return filterTopic !== topic;
+    });
+    setSelectedTopics(newTopicsList)
+  };
+
 // call to get all activities
 useEffect(() => {
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/activities`)
@@ -36,23 +50,11 @@ useEffect(() => {
       });
     }, []);
 
-  //call to get locations
-  // useEffect(() => {
-  //   axios.get('https://national-parks-finder-backend.herokuapp.com/parks/locations')
-  //     .then((response) => {
-  //         setMapMarkers(response.data);
-  //         console.log(response.data);
-  //         return response.data;
-  //     })
-  //     .catch((error) => {
-  //       console.log("Error:", error);
-  //     });
-  // }, []);
 
   //call to get filtered locations
     useEffect(() => {
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter`,
-        {'activities': selectedActivities})
+        {'activities': selectedActivities, 'topics': selectedTopics})
         .then((response) => {
             setMapMarkers(response.data);
             return response.data;
@@ -60,7 +62,7 @@ useEffect(() => {
         .catch((error) => {
           console.log("Error:", error);
         });
-    }, [selectedActivities]); // make this dependant on selectedActivities
+    }, [selectedActivities, selectedTopics]); // make this dependant on selectedActivities
 
   
 // axios call to get all topics
@@ -93,8 +95,8 @@ useEffect(() => {
         deselectActivity={deselectActivity}
         />
         <TopicsList topics={topics}
-        selectFilter={selectActivity}
-        deselectFilter={deselectActivity}
+        selectTopic={selectTopic}
+        deselectTopic={deselectTopic}
         />
       </section>
     </div>

@@ -2,7 +2,7 @@ import "./Map.css";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Map = ({mapMarkers}) => {
-
+  console.log(mapMarkers[0].entranceFees[0]['cost']);
   return (
     <MapContainer
     center = {[39.50, -98.35]}
@@ -24,7 +24,9 @@ const Map = ({mapMarkers}) => {
                 <p>{park.description}</p>
                 <h2>Contacts</h2>
                 <p>Phone: {park.contacts.phoneNumbers}</p>
-                <li>Fees {park.entranceFees.cost}</li>
+                <p>Fees: {park.entranceFees.map(({cost, description, title}) => 
+                          (<li>{cost}</li>))}
+                </p>
               </section>}
             </Popup>
           </Marker>
