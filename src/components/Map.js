@@ -25,10 +25,6 @@ const Map = ({mapMarkers}) => {
                 <h2>Contacts</h2>
                 <p>Phone: {park.contacts.phoneNumbers}</p>
                 <li>Fees {park.entranceFees.cost}</li>
-
-              
-              
-              
               </section>}
             </Popup>
           </Marker>

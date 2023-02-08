@@ -1,12 +1,14 @@
 import "./App.css";
 import axios from "axios";
 import ActivitiesList from "./components/ActivitiesList";
+import TopicsList from './components/TopicsList'
 import Map from "./components/Map";
 import { useState, useEffect } from "react";
 
 const App = () => {
   const [mapMarkers, setMapMarkers] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [selectedActivities, setSelectedActivities] = useState([]);
 
   const selectActivity = (activity) => {
@@ -24,7 +26,7 @@ const App = () => {
 
 // call to get all activities
 useEffect(() => {
-    axios.get('https://national-parks-finder-backend.herokuapp.com/activities')
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/activities`)
       .then((response) => {
         setActivities(response.data.activities);
         return response.data;
@@ -49,7 +51,7 @@ useEffect(() => {
 
   //call to get filtered locations
     useEffect(() => {
-      axios.post('https://national-parks-finder-backend.herokuapp.com/parks/filter',
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter`,
         {'activities': selectedActivities})
         .then((response) => {
             setMapMarkers(response.data);
@@ -61,7 +63,17 @@ useEffect(() => {
     }, [selectedActivities]); // make this dependant on selectedActivities
 
   
-// axios call to get topics
+// axios call to get all topics
+useEffect(() => {
+  axios.get(`${process.env.REACT_APP_BACKEND_URL}/topics`)
+    .then((response) => {
+      setTopics(response.data.topics);
+      return response.data;
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+  }, []);
 
 
 // app should be the source of parks that get passed to maps
@@ -79,6 +91,10 @@ useEffect(() => {
         <ActivitiesList activities={activities}
         selectActivity={selectActivity}
         deselectActivity={deselectActivity}
+        />
+        <TopicsList topics={topics}
+        selectFilter={selectActivity}
+        deselectFilter={deselectActivity}
         />
       </section>
     </div>

@@ -4,8 +4,8 @@ import Activity from './Activity.js'
 const ActivitiesList = ({activities, selectActivity, deselectActivity}) => {
 
   return (
-    <>
-    <h3>Activities</h3>
+    <section className='activities-list-section'>
+    <div className='activities-menu'><h3>Activities</h3></div>
     <ul className='activities-list'>
       {activities.map((activity) =>
       (<Activity key={activity}
@@ -14,7 +14,7 @@ const ActivitiesList = ({activities, selectActivity, deselectActivity}) => {
       deselectActivity={deselectActivity}
       />))}
     </ul>
-    </>
+    </section>
   )
 };
 
