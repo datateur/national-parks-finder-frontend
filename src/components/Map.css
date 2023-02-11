@@ -3,5 +3,10 @@
     max-height: 100%;
 }
 
+.contacts {
+    display: flex;
+    padding: 0px;
+}
+
 .leaflet-popup-content {
 }

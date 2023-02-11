@@ -29,3 +29,8 @@
     grid-area: 1 / 4 / 8 / auto-fill;
     z-index: 0;
 }
+
+.parks-total {
+    color: #2f694a;
+    text-align: center;
+}

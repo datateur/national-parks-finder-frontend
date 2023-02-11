@@ -15,26 +15,55 @@ const Map = ({mapMarkers}) => {
     />
     {mapMarkers.map((park) => (
     <Marker key={park.parkCode} position={[park.latitude, park.longitude]}>
-    <Popup maxHeight={400} minWidth={500}> 
+    <Popup maxHeight={400} minWidth={500} maxWidth={500}> 
       {<section className="park-bio">
-          <h2>{park.fullName}</h2>
+          <h1>{park.fullName}</h1>
+          <a href={park.url} target='_blank' rel='noreferrer noopener'>Official Park Website</a>
           <img src={park.images[0].url} alt={park.images[0].altText}></img>
           <p>{park.description}</p>
+          <h2>Standard Hours</h2>
+          <div>
+            <p>{park.operatingHours.map((site) => (
+              <>
+              <b>{site['name']}</b><br/><br/>
+              Monday: {site.standardHours.monday} <br/>
+              Tuesday: {site.standardHours.tuesday} <br/>
+              Wednesday: {site.standardHours.wednesday} <br/>
+              Thursday: {site.standardHours.thursday} <br/>
+              Friday: {site.standardHours.friday} <br/>
+              Saturday: {site.standardHours.saturday} <br/>
+              Sunday: {site.standardHours.sunday} <br/><br/>
+              </>
+            ))}
+            </p>
+          </div>
+
+          <h2>Fees</h2>
+          <p>{park.fees.map((fee) => (
+            <>
+            <b> {fee.title} </b> <br/>
+            Cost: ${fee.cost} <br/>
+            {fee.description} <br/><br/>
+            </>
+          ))}
+          </p>
+
           <h2>Contact</h2>
-            <h3>Phone</h3>
+          <div className='contacts'>
+            <h3>Phone:</h3>
             <p>{park.phoneNumbers.map((number) => (
-                <p>
+                <>
                 {number['type']}: {number['phoneNumber']}
-                </p>
+                <br/></>
             ))}</p>
             <h3>E-mail:</h3>
-            <div>{park.emails.map((email) => (
-              <p>
+            <p>{park.emails.map((email) => (
+              <><br/>
                 {email}
-              </p>
-            ))}</div>
-          <p>Fees: {}</p>
-          <a href={park.url}>Park Website</a>
+              </>
+            ))}</p>
+            </div>
+
       </section>}
     </Popup>
     </Marker>

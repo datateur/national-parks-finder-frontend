@@ -53,7 +53,7 @@ useEffect(() => {
 
   //call to get filtered locations
     useEffect(() => {
-      axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter/db`,
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter`,
         {'activities': selectedActivities, 'topics': selectedTopics})
         .then((response) => {
             setMapMarkers(response.data);
@@ -77,12 +77,8 @@ useEffect(() => {
     });
   }, []);
 
+  let number_of_parks = Object.keys(mapMarkers).length;
 
-// app should be the source of parks that get passed to maps
-// all activities should be passed down to activitieslist and activitieslist listens
-// listens for selections and passes back up a filtered list of activities
-// app then passes the filteredActivities list into the call to /parks/filter
-// and passes down the filtered parks locations to maps
 
   return (
     <>
@@ -94,6 +90,7 @@ useEffect(() => {
           see more information.
         </p>
         </div>
+        <h3 className='parks-total'> {number_of_parks} {number_of_parks === 1? 'park found' : 'parks found'}</h3>
         <ActivitiesList activities={activities}
         selectActivity={selectActivity}
         deselectActivity={deselectActivity}
