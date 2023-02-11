@@ -10,16 +10,22 @@
 
 .sidebar {
     grid-area: 1 / 1 / 8 / 5;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
     background-color: #f2f1e8;
     color: black;
-    padding: 0px 20px;
+    padding: 0px;
+    max-width: 400px;
+    min-width: 400px;
+    z-index: 999;
+}
 
+.welcome {
+    padding: 30px;
+    text-align: center;
 }
 
 /* map */
 .leaflet-container {
-    height: '100vh';
-    width: '100wh';
-    grid-area: 1 / 5 / 8 / auto-fill;
+    grid-area: 1 / 4 / 8 / auto-fill;
+    z-index: 0;
 }

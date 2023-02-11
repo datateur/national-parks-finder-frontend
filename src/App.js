@@ -53,7 +53,7 @@ useEffect(() => {
 
   //call to get filtered locations
     useEffect(() => {
-      axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter`,
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter/db`,
         {'activities': selectedActivities, 'topics': selectedTopics})
         .then((response) => {
             setMapMarkers(response.data);
@@ -87,9 +87,13 @@ useEffect(() => {
   return (
     <>
     <div className="App">
-      <Map mapMarkers={mapMarkers}/>
       <section className="sidebar">
-        <h2> This is app</h2>
+        <div className='welcome'>
+        <h2> Welcome to National Parks Finder!</h2>
+        <p> Pick a filter below to begin finding parks. Click on a marker to 
+          see more information.
+        </p>
+        </div>
         <ActivitiesList activities={activities}
         selectActivity={selectActivity}
         deselectActivity={deselectActivity}
@@ -99,6 +103,7 @@ useEffect(() => {
         deselectTopic={deselectTopic}
         />
       </section>
+      <Map mapMarkers={mapMarkers}/>
     </div>
     </>
   );

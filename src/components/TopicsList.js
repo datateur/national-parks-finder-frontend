@@ -9,9 +9,10 @@ const TopicsList = ({topics, selectTopic, deselectTopic}) => {
     <section className='topics-list-section'>
     <div className='topics-menu' 
       onClick={() => setShowTopics(!showTopics)}>
-    <h3>Topics</h3></div>
-    <div id={showTopics? 'show-dropdown' : 'hide-dropdown'}>
-    <ul className='topics-list'>
+    <h3 className='title'>Topics <span className='arrow'>{showTopics? '▼':'◀'}</span></h3>
+    </div>
+    <div className='topics-list' id={showTopics? 'show-dropdown' : 'hide-dropdown'}>
+    <ul>
       {topics.map((topic) =>
       (<TopicButton key={topic}
       topic={topic}
