@@ -1,0 +1,28 @@
+.type-button-selected {
+    background-color: #3a825b;
+    color: white;
+    text-align: center;
+    border: 2px solid #3a825b;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 12px;
+    transition-duration: 0.4s;
+    margin: 1px;
+}
+
+.type-button-unselected {
+    background-color: #f1f2e9;
+    color: #2f694a;
+    text-align: center;
+    border: 2px solid #3a825b;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 12px;
+    transition-duration: 0.4s;
+    margin: 1px;
+}
+
+.type-button-unselected:hover {
+    background-color: #48a776;
+    color: white;
+}

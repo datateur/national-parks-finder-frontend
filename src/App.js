@@ -2,6 +2,7 @@ import "./App.css";
 import axios from "axios";
 import ActivitiesList from "./components/ActivitiesList";
 import TopicsList from './components/TopicsList'
+import TypesList from './components/TypesList'
 import Map from "./components/Map";
 import { useState, useEffect } from "react";
 
@@ -9,8 +10,10 @@ const App = () => {
   const [mapMarkers, setMapMarkers] = useState([]);
   const [activities, setActivities] = useState([]);
   const [topics, setTopics] = useState([]);
+  const [types, setTypes] = useState([]);
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [selectedTopics, setSelectedTopics] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState([]);
 
   const selectActivity = (activity) => {
     const newActivitiesList = [...selectedActivities];
@@ -38,6 +41,19 @@ const App = () => {
     setSelectedTopics(newTopicsList)
   };
 
+  const selectType = (type) => {
+    const newTypesList = [...selectedTypes];
+    newTypesList.push(type);
+    setSelectedTypes(newTypesList)
+  };
+
+  const deselectType = (type) => {
+    const newTypesList = selectedTypes.filter((filterType) => {
+      return filterType !== type;
+    });
+    setSelectedTypes(newTypesList)
+  };
+
 // call to get all activities
 useEffect(() => {
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/activities`)
@@ -54,7 +70,7 @@ useEffect(() => {
   //call to get filtered locations
     useEffect(() => {
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter`,
-        {'activities': selectedActivities, 'topics': selectedTopics})
+        {'activities': selectedActivities, 'topics': selectedTopics, 'types': selectedTypes})
         .then((response) => {
             setMapMarkers(response.data);
             return response.data;
@@ -62,7 +78,7 @@ useEffect(() => {
         .catch((error) => {
           console.log("Error:", error);
         });
-    }, [selectedActivities, selectedTopics]); // make this dependant on selectedActivities
+    }, [selectedActivities, selectedTopics, selectedTypes]); // make this dependant on selectedActivities
 
   
 // axios call to get all topics
@@ -70,6 +86,18 @@ useEffect(() => {
   axios.get(`${process.env.REACT_APP_BACKEND_URL}/topics`)
     .then((response) => {
       setTopics(response.data.topics);
+      return response.data;
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+  }, []);
+
+// axios call to get all types
+useEffect(() => {
+  axios.get(`${process.env.REACT_APP_BACKEND_URL}/types`)
+    .then((response) => {
+      setTypes(response.data.types);
       return response.data;
     })
     .catch((error) => {
@@ -98,6 +126,10 @@ useEffect(() => {
         <TopicsList topics={topics}
         selectTopic={selectTopic}
         deselectTopic={deselectTopic}
+        />
+        <TypesList types={types}
+        selectType={selectType}
+        deselectType={deselectType}
         />
       </section>
       <Map mapMarkers={mapMarkers}/>
