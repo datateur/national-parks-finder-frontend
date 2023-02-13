@@ -163,7 +163,7 @@ useEffect(() => {
         <div className='welcome'>
         <h2> Welcome to National Parks Finder!</h2>
         <p> Pick a filter below to begin finding parks. Click on a marker to 
-          see more information.
+          see park information.
         </p>
         </div>
         <h3 className='parks-total'> {number_of_parks} {number_of_parks === 1? 'site found' : 'sites found'}</h3>
