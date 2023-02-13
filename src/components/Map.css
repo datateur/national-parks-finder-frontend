@@ -8,5 +8,18 @@
     padding: 0px;
 }
 
-.leaflet-popup-content {
+.info {
+    padding: 2px 30px;
+    padding-bottom: 10px;
+}
+
+a {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.park-bio > h2 {
+    background-color: #3a825b;
+    color: white;
+    padding: 10px 15px;
 }

@@ -7,7 +7,7 @@ import Map from "./components/Map";
 import { useState, useEffect } from "react";
 
 const App = () => {
-  const [mapMarkers, setMapMarkers] = useState([]);
+  const [parksData, setParksData] = useState([]);
   const [activities, setActivities] = useState([]);
   const [topics, setTopics] = useState([]);
   const [types, setTypes] = useState([]);
@@ -16,6 +16,7 @@ const App = () => {
   const [selectedTypes, setSelectedTypes] = useState([]);
   //const [selectedFilters, setSelectedFilters] = useState({'activities':[], 'topics': [], 'types':[]})
   
+  let number_of_parks = Object.keys(parksData).length;
   // const selectFilter = (filter) => {
   //   var setFilter;
   //   var selectedList;
@@ -67,7 +68,6 @@ const App = () => {
   //   setFilter(newFilterList)
   // };
 
-
   const selectActivity = (activity) => {
     const newActivitiesList = [...selectedActivities];
     newActivitiesList.push(activity);
@@ -118,23 +118,8 @@ useEffect(() => {
         console.log("Error:", error);
       });
     }, []);
-
-
-  //call to get filtered locations
-    useEffect(() => {
-      axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter`,
-        {'activities': selectedActivities, 'topics': selectedTopics, 'types': selectedTypes})
-        .then((response) => {
-            setMapMarkers(response.data);
-            return response.data;
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-        });
-    }, [selectedActivities, selectedTopics, selectedTypes]); // make this dependant on selectedActivities
-
   
-// axios call to get all topics
+// call to get all topics
 useEffect(() => {
   axios.get(`${process.env.REACT_APP_BACKEND_URL}/topics`)
     .then((response) => {
@@ -146,7 +131,7 @@ useEffect(() => {
     });
   }, []);
 
-// axios call to get all types
+// call to get all park types
 useEffect(() => {
   axios.get(`${process.env.REACT_APP_BACKEND_URL}/types`)
     .then((response) => {
@@ -158,8 +143,18 @@ useEffect(() => {
     });
   }, []);
 
-  let number_of_parks = Object.keys(mapMarkers).length;
-
+  //call to get all or filtered parks
+  useEffect(() => {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/parks/filter`,
+      {'activities': selectedActivities, 'topics': selectedTopics, 'types': selectedTypes})
+      .then((response) => {
+          setParksData(response.data);
+          return response.data;
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  }, [selectedActivities, selectedTopics, selectedTypes]);
 
   return (
     <>
@@ -185,7 +180,7 @@ useEffect(() => {
         deselectType={deselectType}
         />
       </section>
-      <Map mapMarkers={mapMarkers}/>
+      <Map parksData={parksData}/>
     </div>
     </>
   );

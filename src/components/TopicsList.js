@@ -3,7 +3,7 @@ import TopicButton from './TopicButton';
 import { useState } from 'react';
 
 const TopicsList = ({topics, selectTopic, deselectTopic}) => {
-  const [showTopics, setShowTopics] = useState(true);
+  const [showTopics, setShowTopics] = useState(false);
 
   return (
     <section className='topics-list-section'>

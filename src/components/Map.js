@@ -1,68 +1,79 @@
 import "./Map.css";
+import Slideshow from './Slideshow';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-const Map = ({mapMarkers}) => {
+const Map = ({parksData}) => {
 
   return (
     <MapContainer
-      center = {[39.50, -98.35]}
-      zoom = {4}
+      center = {[43, -80]}
+      zoom = {3}
       scrollWheelZoom={true}>
     <TileLayer 
       url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
       maxZoom={19}
       attribution={'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}
     />
-    {mapMarkers.map((park) => (
+    {parksData.map((park) => (
     <Marker key={park.parkCode} position={[park.latitude, park.longitude]}>
-    <Popup maxHeight={400} minWidth={500} maxWidth={500}> 
+    <Popup maxHeight={500} minWidth={600} maxWidth={600}> 
       {<section className="park-bio">
-          <h1>{park.fullName}</h1>
-          <a href={park.url} target='_blank' rel='noreferrer noopener'>Official Park Website</a>
+          <h1>{park.fullName}, {park.states}</h1>
+          {/* <Slideshow park={park}/> */}
           <img src={park.images[0].url} alt={park.images[0].altText}></img>
+          <div className='info'>
           <p>{park.description}</p>
-          <h2>Standard Hours</h2>
-          <div>
-            <p>{park.operatingHours.map((site) => (
+          <a href={park.url} target='_blank' rel='noreferrer noopener'>Visit Park Website</a>
+          </div>
+          <h2>Address</h2>
+          <div className='info'>{park.addresses.map((address) => (
               <>
-              <b>{site['name']}</b><br/><br/>
+              {address.line1} {address.line2} {address.line3}<br/>
+              {address.city}, {address.state} {address.postalCode}
+              </>
+            ))}
+          </div>
+          <h2>Standard Hours</h2>
+          <div className='info'>{park.operatingHours.map((site) => (
+              <>
+              <h3>{site['name']}</h3>
               Monday: {site.standardHours.monday} <br/>
               Tuesday: {site.standardHours.tuesday} <br/>
               Wednesday: {site.standardHours.wednesday} <br/>
               Thursday: {site.standardHours.thursday} <br/>
               Friday: {site.standardHours.friday} <br/>
               Saturday: {site.standardHours.saturday} <br/>
-              Sunday: {site.standardHours.sunday} <br/><br/>
+              Sunday: {site.standardHours.sunday} <br/>
+              <p>{site.description}</p>
               </>
             ))}
-            </p>
           </div>
 
           <h2>Fees</h2>
-          <p>{park.fees.map((fee) => (
-            <>
-            <b> {fee.title} </b> <br/>
+          <div className='info'>{park.fees.map((fee) => (
+            <li>
+            <h3>{fee.title}</h3>
             Cost: ${fee.cost} <br/>
-            {fee.description} <br/><br/>
-            </>
+            {fee.description} <br/>
+            </li>
           ))}
-          </p>
+          </div>
 
           <h2>Contact</h2>
-          <div className='contacts'>
+          <div className='info'>
             <h3>Phone:</h3>
             <p>{park.phoneNumbers.map((number) => (
                 <>
-                {number['type']}: {number['phoneNumber']}
+                <b>{number['type']}:</b> {number['phoneNumber']}
                 <br/></>
             ))}</p>
             <h3>E-mail:</h3>
             <p>{park.emails.map((email) => (
-              <><br/>
+              <>
                 {email}
               </>
             ))}</p>
-            </div>
+          </div>
 
       </section>}
     </Popup>

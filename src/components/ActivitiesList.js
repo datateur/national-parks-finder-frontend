@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ActivityButton from "./ActivityButton";
 
 const ActivitiesList = ({activities, selectActivity, deselectActivity}) => {
-  const [showActivities, setShowActivities] = useState(true);
+  const [showActivities, setShowActivities] = useState(false);
 
 
   return (

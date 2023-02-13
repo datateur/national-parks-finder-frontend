@@ -3,7 +3,7 @@ import TypeButton from './TypeButton';
 import { useState } from 'react';
 
 const TypesList = ({types, selectType, deselectType}) => {
-  const [showTypes, setShowTypes] = useState(true);
+  const [showTypes, setShowTypes] = useState(false);
 
   return (
     <section className='types-list-section'>
