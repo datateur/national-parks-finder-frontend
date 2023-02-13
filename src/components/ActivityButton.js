@@ -1,7 +1,7 @@
-import "./Activity.css";
+import "./ActivityButton.css";
 import { useState } from "react";
 
-const Activity = ({activity, selectActivity, deselectActivity}) => {
+const ActivityButton = ({activity, selectActivity, deselectActivity}) => {
   const [toggle, setToggle] = useState(false);
 
   const handleClick = () => {
@@ -17,4 +17,4 @@ const Activity = ({activity, selectActivity, deselectActivity}) => {
   );
 };
 
-export default Activity;
+export default ActivityButton;

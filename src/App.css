@@ -16,17 +16,21 @@
     padding: 0px;
     max-width: 400px;
     min-width: 400px;
+    max-height: 100vh;
     z-index: 999;
+    overflow-y: auto;
 }
 
 .welcome {
-    padding: 30px;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
 }
 
 /* map */
 .leaflet-container {
-    grid-area: 1 / 4 / 8 / auto-fill;
+    grid-area: 1 / 5 / 8 / auto-fill;
     z-index: 0;
 }
 

@@ -14,6 +14,59 @@ const App = () => {
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
+  //const [selectedFilters, setSelectedFilters] = useState({'activities':[], 'topics': [], 'types':[]})
+  
+  // const selectFilter = (filter) => {
+  //   var setFilter;
+  //   var selectedList;
+
+  //   if (filter in activities){
+  //     setFilter = setSelectedActivities;
+  //     selectedList = selectedActivities;
+  //     console.log(setFilter)
+  //     console.log(selectedList)
+  //   }
+
+  //   else if (filter in topics){
+  //     setFilter = setSelectedTopics;
+  //     selectedList = selectedTopics;
+  //   }
+
+  //   else if (filter in types){
+  //     setFilter = setSelectedTypes;
+  //     selectedList = selectedTypes;
+  //   };
+
+  //   const newFilterList = [...selectedList];
+  //   newFilterList.push(filter);
+  //   setFilter(newFilterList);
+  // };
+
+  // const deselectFilter = (filter) => {
+  //   var setFilter;
+  //   var selectedList;
+
+  //   if (filter in activities){
+  //     setFilter = setSelectedActivities;
+  //     selectedList = selectedActivities;
+  //   }
+
+  //   else if (filter in topics){
+  //     setFilter = setSelectedTopics;
+  //     selectedList = selectedTopics;
+  //   }
+
+  //   else if (filter in types){
+  //     setFilter = setSelectedTypes;
+  //     selectedList = selectedTypes;
+  //   };
+
+  //   const newFilterList = selectedList.filter((x) => {
+  //     return x !== filter;
+  //   });
+  //   setFilter(newFilterList)
+  // };
+
 
   const selectActivity = (activity) => {
     const newActivitiesList = [...selectedActivities];
@@ -118,7 +171,7 @@ useEffect(() => {
           see more information.
         </p>
         </div>
-        <h3 className='parks-total'> {number_of_parks} {number_of_parks === 1? 'park found' : 'parks found'}</h3>
+        <h3 className='parks-total'> {number_of_parks} {number_of_parks === 1? 'site found' : 'sites found'}</h3>
         <ActivitiesList activities={activities}
         selectActivity={selectActivity}
         deselectActivity={deselectActivity}

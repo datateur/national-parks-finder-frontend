@@ -1,4 +1,4 @@
-import "./Type.css";
+import "./TypeButton.css";
 import { useState } from "react";
 
 const TypeButton = ({type, selectType, deselectType}) => {

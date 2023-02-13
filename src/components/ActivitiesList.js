@@ -1,6 +1,6 @@
 import "./ActivitiesList.css";
-import Activity from './Activity.js'
 import { useState } from 'react';
+import ActivityButton from "./ActivityButton";
 
 const ActivitiesList = ({activities, selectActivity, deselectActivity}) => {
   const [showActivities, setShowActivities] = useState(true);
@@ -15,7 +15,7 @@ const ActivitiesList = ({activities, selectActivity, deselectActivity}) => {
       <div className='activities-list' id={showActivities? 'show-dropdown' : 'hide-dropdown'}>
         <ul>
           {activities.map((activity) =>
-          (<Activity key={activity}
+          (<ActivityButton key={activity}
           activity={activity}
           selectActivity={selectActivity} 
           deselectActivity={deselectActivity}
